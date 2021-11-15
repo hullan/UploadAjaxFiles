@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>File(s) size</title>
+  <script>
+    function updateSize() {
+      var nBytes = 0;
+      var preview = document.querySelector('img');
+      oFiles = document.getElementById("uploadInput").files;
+      nFiles = oFiles.length;
+      var nFile = oFiles[0];
+
+      var sOutput = nFile.size + " bytes";
+      var name = nFile.name;
+
+      var reader = new FileReader();
+
+      reader.onload = function () {
+        preview.src = reader.result;
+      };
+      reader.readAsDataURL(nFile);
+      alert(nFiles);
+      alert(name);
+
+      document.getElementById("fileNum").innerHTML = nFiles;
+      document.getElementById("fileSize").innerHTML = sOutput;
+    }
+  </script>
+</head>
+
+<body onload="updateSize();">
+  <form name="uploadForm">
+    <p><input id="uploadInput" type="file" name="myFiles" onchange="updateSize();"><span id="fileNum">0</span>; total
+      size: <span id="fileSize">0</span></p>
+    <img src="" height="200" alt="Image preview...">
+  </form>
+</body>
+
+</html>
